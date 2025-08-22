@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__private-journal__process_thoughts"
+    ],
+    "deny": []
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run /Users/davethomas/.claude/hooks/utilities/UserPromptSubmit/append_ultrathink.py"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bun x ccusage statusline"
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1754054122745
+  }
+}

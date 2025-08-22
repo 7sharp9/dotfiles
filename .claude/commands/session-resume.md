@@ -1,0 +1,5 @@
+  - Read CURRENT.md for immediate status
+  - Review latest session file for context
+  - Search knowledge base + journal for insights
+  - Present focused "where we are + what's next"
+  - Set up TodoWrite with current priorities

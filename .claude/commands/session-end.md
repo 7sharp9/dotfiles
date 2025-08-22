@@ -1,0 +1,5 @@
+  - Create timestamped session file with full summary
+  - Update CURRENT.md with status + next priorities
+  - Record insights in knowledge files
+  - Provide clean handoff summary
+  - Use TodoRead to capture incomplete tasks

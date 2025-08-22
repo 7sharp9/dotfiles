@@ -19,61 +19,49 @@ Rule #1: If you want exception to ANY rule, YOU MUST STOP and get explicit permi
 
 ## Writing code
 
-- CRITICAL: NEVER USE --no-verify WHEN COMMITTING CODE
-- We prefer simple, clean, maintainable solutions over clever or complex ones, even if the latter are more concise or performant. Readability and maintainability are primary concerns.
-- Make the smallest reasonable changes to get to the desired outcome. You MUST ask permission before reimplementing features or systems from scratch instead of updating the existing implementation.
-- When modifying code, match the style and formatting of surrounding code, even if it differs from standard style guides. Consistency within a file is more important than strict adherence to external standards.
-- NEVER make code changes that aren't directly related to the task you're currently assigned. If you notice something that should be fixed but is unrelated to your current task, document it in a new issue instead of fixing it immediately.
-- NEVER remove code comments unless you can prove that they are actively false. Comments are important documentation and should be preserved even if they seem redundant or unnecessary to you.
-- All code files should start with a brief 2 line comment explaining what the file does. Each line of the comment should start with the string "ABOUTME: " to make it easy to grep for.
-- When writing comments, avoid referring to temporal context about refactors or recent changes. Comments should be evergreen and describe the code as it is, not how it evolved or was recently changed.
-- NEVER implement a mock mode for testing or for any purpose. We always use real data and real APIs, never mock implementations.
-- When you are trying to fix a bug or compilation error or any other issue, YOU MUST NEVER throw away the old implementation and rewrite without expliict permission from the user. If you are going to do this, YOU MUST STOP and get explicit permission from the user.
-- NEVER name things as 'improved' or 'new' or 'enhanced', etc. Code naming should be evergreen. What is new someday will be "old" someday.
+- CRITICAL: never use --no-verify when committing.
+- Prefer simple, readable, maintainable solutions; make the smallest change that achieves the goal.
+- Ask permission before reimplementing or discarding existing features/implementations.
+- Match surrounding code style and formatting exactly.
+- Only change code directly related to the task; log unrelated issues as a new issue.
+- Preserve comments unless provably false; do not add temporal/refactor history to comments.
+- Every code file must start with two lines beginning "ABOUTME: ".
+- Never implement a mock mode; use real data and real APIs for tests.
+- Never rewrite whole implementations or remove old code without explicit user permission.
+- Avoid names like "new", "improved", "enhanced", etc.; prefer evergreen, descriptive names.
 
-## Naming and Comments
+## Naming and comments
 
-  - Names MUST tell what code does, not how it's implemented or its history
-  - NEVER use implementation details in names (e.g., "ZodValidator", "MCPWrapper", "JSONParser")
-  - NEVER use temporal/historical context in names (e.g., "NewAPI", "LegacyHandler", "UnifiedTool")
-  - NEVER use pattern names unless they add clarity (e.g., prefer "Tool" over "ToolFactory")
+- Names describe what something *is* or *does*, not how or when it was implemented.
+- Use domain nouns for types/modules and verbs for actions:
+  - Good: Tool, RemoteTool, Registry, execute(), validateArgs()
+  - Bad: ZodValidator, MCPWrapper, NewAPI, LegacyHandler, ToolRegistryManager, executeToolWithValidation
+- Avoid implementation, temporal, or pattern words unless they add clarity: wrapper, new, old, legacy, enhanced, Abstract*, *Factory when unnecessary.
+- Keep names short, stable, and searchable; prefer clarity over cleverness.
 
-  Good names tell a story about the domain:
-  - `Tool` not `AbstractToolInterface`
-  - `RemoteTool` not `MCPToolWrapper`
-  - `Registry` not `ToolRegistryManager`
-  - `execute()` not `executeToolWithValidation()`
+Comments:
+- Say what code does NOW in one sentence. No history, refactor notes, or internal-library mentions.
+- Avoid: "Refactored from...", "Uses Zod...", "Wrapper around MCP..."
+- Prefer: "Executes a tool with validated arguments."
 
-  Comments must describe what the code does NOW, not:
-  - What it used to do
-  - How it was refactored
-  - What framework/library it uses internally
-  - Why it's better than some previous version
-
-  Examples:
-  // BAD: This uses Zod for validation instead of manual checking
-  // BAD: Refactored from the old validation system
-  // BAD: Wrapper around MCP tool protocol
-  // GOOD: Executes tools with validated arguments
-
-  If you catch yourself writing "new", "old", "legacy", "wrapper", "unified", or implementation details in names or comments, STOP and find a better name that describes the thing's
-  actual purpose.
+Quick checklist for writers/LLMs:
+- If a name mentions a library, protocol, or “new/old”, rename to the purpose.
+- If a comment explains why something changed, move that to a commit or design note — comments should describe current behavior.
+- Examples:
+// BAD: Refactored from v1; uses Zod for validation
+// GOOD: Validates and executes the tool with given arguments
 
 ## Writing code
-
-- When submitting work, verify that you have FOLLOWED ALL RULES. (See Rule #1)
-- YOU MUST make the SMALLEST reasonable changes to achieve the desired outcome.
-- We STRONGLY prefer simple, clean, maintainable solutions over clever or complex ones. Readability and maintainability are PRIMARY CONCERNS, even at the cost of conciseness or performance.
-- YOU MUST NEVER make code changes unrelated to your current task. If you notice something that should be fixed but is unrelated, document it in your journal rather than fixing it immediately.
-- YOU MUST WORK HARD to reduce code duplication, even if the refactoring takes extra effort.
-- YOU MUST NEVER throw away or rewrite implementations without EXPLICIT permission. If you're considering this, YOU MUST STOP and ask first.
-- YOU MUST get Dave's explicit approval before implementing ANY backward compatibility.
-- YOU MUST MATCH the style and formatting of surrounding code, even if it differs from standard style guides. Consistency within a file trumps external standards.
-- YOU MUST NEVER remove code comments unless you can PROVE they are actively false. Comments are important documentation and must be preserved.
-- YOU MUST NEVER add comments about what used to be there or how something has changed. 
-- YOU MUST NEVER refer to temporal context in comments (like "recently refactored" "moved") or code. Comments should be evergreen and describe the code as it is. If you name something "new" or "enhanced" or "improved", you've probably made a mistake and MUST STOP and ask me what to do.
-- All code files MUST start with a brief 2-line comment explaining what the file does. Each line MUST start with "ABOUTME: " to make them easily greppable.
-- YOU MUST NOT change whitespace that does not affect execution or output. Otherwise, use a formatting tool.
+- Before submitting, verify ALL RULES are followed (Rule #1: no exceptions without Dave's explicit permission).
+- Make the smallest reasonable change to achieve the goal.
+- Prefer simple, readable, maintainable solutions over clever or compact ones.
+- Never change code unrelated to the task; log unrelated issues in the journal.
+- Minimize duplication; do not rewrite or discard implementations without explicit permission.
+- Get Dave's approval before any backward-compatibility work.
+- Match surrounding code style and formatting exactly.
+- Preserve comments unless provably false; do not add temporal or history notes.
+- Every code file must start with two lines beginning "ABOUTME: " describing the file.
+- Do not change whitespace that does not affect execution; use a formatter when needed.
 
 # Specific Technologies
 
@@ -86,76 +74,33 @@ Rule #1: If you want exception to ANY rule, YOU MUST STOP and get explicit permi
 - @~/.claude/docs/using-uv.md
 
 ## Version Control
-
-- If the project isn't in a git repo, YOU MUST STOP and ask permission to initialize one.
-- YOU MUST STOP and ask how to handle uncommitted changes or untracked files when starting work.  Suggest committing existing work first.
-- When starting work without a clear branch for the current task, YOU MUST create a WIP branch.
-- YOU MUST TRACK All non-trivial changes in git.
-- YOU MUST commit frequently throughout the development process, even if your high-level tasks are not yet done. Commit your journal entries.
-- NEVER SKIP OR EVADE OR DISABLE A PRE-COMMIT HOOK
-- NEVER use `git add -A` unless you've just done a `git status` - You don't want to add random test files to the repo.
+- If no git repo: STOP and ask permission before git init.
+- STOP and ask how to handle uncommitted/untracked work; suggest committing existing work first.
+- If no task branch: create a WIP branch.
+- TRACK all non-trivial changes; commit frequently (include journal entries).
+- NEVER skip or disable pre-commit hooks.
+- NEVER run `git add -A` unless you just ran `git status`.
 
 ## Testing
-
-- Tests MUST comprehensively cover ALL functionality. 
-- NO EXCEPTIONS POLICY: ALL projects MUST have unit tests, integration tests, AND end-to-end tests. The only way to skip any test type is if Dave EXPLICITLY states: "I AUTHORIZE YOU TO SKIP WRITING TESTS THIS TIME."
-- FOR EVERY NEW FEATURE OR BUGFIX, YOU MUST follow TDD:
-    1. Write a failing test that correctly validates the desired functionality
-    2. Run the test to confirm it fails as expected
-    3. Write ONLY enough code to make the failing test pass
-    4. Run the test to confirm success
-    5. Refactor if needed while keeping tests green
-- YOU MUST NEVER write tests that "test" mocked behavior. If you notice tests that test mocked behavior instead of real logic, you MUST stop and warn Dave about them.
-- YOU MUST NEVER implement mocks in end to end tests. We always use real data and real APIs.
-- YOU MUST NEVER ignore system or test output - logs and messages often contain CRITICAL information.
-- YOU MUST NEVER mock the functionality you're trying to test.
-- Test output MUST BE PRISTINE TO PASS. If logs are expected to contain errors, these MUST be captured and tested.
-- YOU MUST NEVER ASSUME THAT TEST FAILURES ARE NOT YOUR FAULT OR YOUR RESPONSIBILITY. If the tests are failing, you are failing.
+- ALL functionality must have unit, integration, and end-to-end tests. Only Dave can authorize skipping any test type.
+- Follow TDD: 1) add failing test, 2) confirm it fails, 3) write minimal code to pass, 4) confirm pass, 5) refactor.
+- NEVER write tests that only validate mocked behavior of real logic.
+- NEVER use mocks in end-to-end tests; use real data/APIs.
+- Do not ignore test or system output; capture and assert expected logs/errors.
 
 ## Issue tracking
+- Use TodoWrite for task tracking.
+- DO NOT remove tasks from TodoWrite without Dave's explicit approval.
 
-- You MUST use your TodoWrite tool to keep track of what you're doing 
-- You MUST NEVER discard tasks from your TodoWrite todo list without Dave's explicit approval
+## Debugging (root-cause first)
+Phase 1 — Investigate: read errors, reproduce reliably, check recent changes.
+Phase 2 — Pattern analysis: find working examples, compare, identify differences, check dependencies.
+Phase 3 — Hypothesis & test: form a single hypothesis, make the smallest test change, verify; if unsure, state "I don't understand X".
+Phase 4 — Implement rules: start with simplest failing test, never add multiple fixes at once, test after each change, if fix fails STOP and re-analyze.
 
-## Systematic Debugging Process
+## Learning & Memory
+- Use the journal frequently; search it before complex tasks.
+- Record architectural decisions, lessons learned, and unrelated findings (as journal items, not immediate fixes).
 
-YOU MUST ALWAYS find the root cause of any issue you are debugging
-YOU MUST NEVER fix a symptom or add a workaround instead of finding a root cause, even if it is faster or I seem like I'm in a hurry.
-
-YOU MUST follow this debugging framework for ANY technical issue:
-
-### Phase 1: Root Cause Investigation (BEFORE attempting fixes)
-- **Read Error Messages Carefully**: Don't skip past errors or warnings - they often contain the exact solution
-- **Reproduce Consistently**: Ensure you can reliably reproduce the issue before investigating
-- **Check Recent Changes**: What changed that could have caused this? Git diff, recent commits, etc.
-
-### Phase 2: Pattern Analysis
-- **Find Working Examples**: Locate similar working code in the same codebase
-- **Compare Against References**: If implementing a pattern, read the reference implementation completely
-- **Identify Differences**: What's different between working and broken code?
-- **Understand Dependencies**: What other components/settings does this pattern require?
-
-### Phase 3: Hypothesis and Testing
-1. **Form Single Hypothesis**: What do you think is the root cause? State it clearly
-2. **Test Minimally**: Make the smallest possible change to test your hypothesis
-3. **Verify Before Continuing**: Did your test work? If not, form new hypothesis - don't add more fixes
-4. **When You Don't Know**: Say "I don't understand X" rather than pretending to know
-
-### Phase 4: Implementation Rules
-- ALWAYS have the simplest possible failing test case. If there's no test framework, it's ok to write a one-off test script.
-- NEVER add multiple fixes at once
-- NEVER claim to implement a pattern without reading it completely first
-- ALWAYS test after each change
-- IF your first fix doesn't work, STOP and re-analyze rather than adding more fixes
-
-## Learning and Memory Management
-
-- YOU MUST use the journal tool frequently to capture technical insights, failed approaches, and user preferences
-- Before starting complex tasks, search the journal for relevant past experiences and lessons learned
-- Document architectural decisions and their outcomes for future reference
-- Track patterns in user feedback to improve collaboration over time
-- When you notice something that should be fixed but is unrelated to your current task, document it in your journal rather than fixing it immediately
-
-# Summary instructions
-
-When you are using /compact, please focus on our conversation, your most recent (and most significant) learnings, and what you need to do next. If we've tackled multiple tasks, aggressively summarize the older ones, leaving more context for the more recent ones.
+## Summary (/compact)
+- Prioritize recent, high-value items; summarize older tasks tersely; state next actions.
