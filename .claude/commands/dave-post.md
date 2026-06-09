@@ -51,12 +51,11 @@ Rules:
 Dave's titles are almost always a **song, album, or film reference**, often with a tenuous-but-delightful link to the topic. Verified examples:
 - "Back to the Primitive" (Soulfly song — and he notes it contains F# notes)
 - "Some Kind of Monster" / "Monster Zero Revisited" (Metallica / Godzilla)
-- "I node something (Bout You)" (INXS "I Need You Tonight", punning on node.js)
+- "I node something (Bout You)" (Alice in chains "I know something 'bout you", punning on node.js)
 - "Terror From The Deep" (X-COM game)
-- "Fell on Dirty Data" (Nirvana "Smells Like Teen Spirit"-era pun, the pandas post)
+- "Fell on Dirty Data" (Soundgarden "Fell on black days"-era pun, the pandas post)
 - "flame on" (Human Torch / FlameGraphs)
-- "Anything you can do …" (Annie Get Your Gun)
-- "Are you my type?" (children's book pun on type matching)
+- "Are you my type?" (pun on typed languages)
 
 Offer **2-3 title options**: at least one cultural-reference pun tied to the topic, and one plainer descriptive fallback. Put the alternatives as a commented line under the title in the frontmatter, like the pandas draft does:
 ```yaml
